@@ -12,9 +12,10 @@
      date: string,
      onChangeDate: (date: string) => void,
      error? : string,
+     placeholderText: string,
  }
  
- const DatePicker = ({ date, onChangeDate, error }: Props) => {
+ const DatePicker = ({ date, onChangeDate, error, placeholderText }: Props) => {
      const [show, setShow] = useState<boolean>(false)
      const onsubmit = (date: Date) => {
          setShow(false)
@@ -26,6 +27,7 @@
                  style={styles.input}
                  value={date}
                  editable={false}
+                 placeholder={placeholderText}
              />
              {show && <DateTimePicker
                  mode="date"

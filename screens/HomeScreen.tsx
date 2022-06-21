@@ -32,20 +32,24 @@ export const HomeScreen = ({ route, navigation }: any) => {
               })
             }
           </View>
-          <View style={styles.button}>
-            <Button
-              color='#7A8AED'
-              title="Ajout Revenus"
-              onPress={() => navigation.navigate("Revenus", route = dataIncome)}
-            />
+          <Text style={styles.styleh2}>Les Actions Rapide</Text>
+          <View style={{flexDirection: "row", justifyContent: "space-around"}}>
+            <View style={styles.button}>
+              <Button
+                color='#7A8AED'
+                title="Ajout Revenus"
+                onPress={() => navigation.navigate("Revenus", route = dataIncome)}
+              />
+            </View>
+            <View style={styles.button}>
+              <Button
+                color='#7A8AED'
+                title="Ajout Dépenses"
+                onPress={() => navigation.navigate("Dépenses", route = amountExpense)}
+              />
+            </View>
           </View>
-          <View style={styles.button}>
-            <Button
-              color='#7A8AED'
-              title="Ajout Dépenses"
-              onPress={() => navigation.navigate("Dépenses", route = amountExpense)}
-            />
-          </View>
+
         </View>
       }
     </>

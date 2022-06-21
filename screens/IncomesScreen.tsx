@@ -50,14 +50,15 @@ const listOptions = [
 ]
 
 
-export const IncomesScreen = () => {
+export const IncomesScreen = ({navigation}: any) => {
     const { control, handleSubmit, formState: { errors } } = useForm<FormData>();
     const onSubmit = (data: FormData) => console.log(data);
     const [selectedOptions, setSelectedOptions] = useState("")
     const [operationDate, setOperationDate] = useState<string>("")
-
+    console.log(operationDate)
     return (
         <View style={styles.container}>
+
             <Controller
                 control={control}
                 rules={{
@@ -106,10 +107,46 @@ export const IncomesScreen = () => {
                     })}
                 </Picker>
             </View>
-            <View style={styles.styleInput}>
-                <DatePicker date={operationDate} onChangeDate={setOperationDate} />
-            </View>
-            <Button style={styles.styleButton} mode="contained" onPress={handleSubmit(onSubmit)} >Submit</Button>     
+            <Controller
+                control={control}
+                name="date"
+                rules={{
+                    required: true
+                }}
+                render={({ field }) => (
+                    <DatePicker 
+                        date={operationDate}
+                        placeholderText="date"
+                        onChangeDate={setOperationDate}
+                        />
+                )}
+
+            />
+            {errors.date && <Text>This is required.</Text>}
+            <Controller
+                control={control}
+                rules={{
+                    required: true,
+                }}
+                render={({ field: { onChange, onBlur, value } }) => (
+                    <TextInput
+                        style={styles.styleInput}
+                        label={"Text"}
+                        onBlur={onBlur}
+                        onChangeText={onChange}
+                        value={value}
+                    />
+                )}
+                name="text"
+            />
+            <Button style={styles.styleButton} mode="contained" onPress={handleSubmit(onSubmit)} >Submit</Button> 
+            <Button 
+                style={styles.styleCancelButton} 
+                mode="contained" 
+                onPress={() => navigation.navigate("Opération")} >
+                    Annuler
+            </Button>     
+
         </View>
     )
 }
@@ -130,6 +167,13 @@ const styles = StyleSheet.create({
         marginTop: 10,
         borderWidth: 1,
         borderColor: "grey",
-        backgroundColor: "#198754",
+        backgroundColor: "#7A8AED",
+    },
+    styleCancelButton: {
+        marginTop: 10,
+        borderWidth: 1,
+        borderColor: "grey",
+        backgroundColor: "grey",
     }
+
 })
